@@ -1,3 +1,114 @@
+buildscript {
+    ext {
+        // app versioning
+        compileSdkVersion = 32
+        minSdkVersion = 21
+        targetSdkVersion = 32
+        versionCode = 1
+        versionName = "1.0.0"
+
+        // standar library version
+        androidxCoreVersion = "1.8.0"
+        appCompatVersion = "1.4.2"
+        materialVersion = "1.6.1"
+        constraintLayoutVersion = "2.1.4"
+        swipeRefreshLayout = "1.1.0"
+        paging_version = "3.1.1"
+
+        // glide
+        glideVersion = "4.13.0"
+
+        // dependencies injection version
+        daggerVersion = "2.42"
+
+        // rest client version
+        retrofitVersion = "2.9.0"
+
+        // http client version
+        okhttpVersion = "4.9.3"
+
+        // coroutines
+        coroutineVersion = "1.3.9"
+
+        // rootbeer version
+        rootbeetVersion = "0.1.0"
+
+        // lifecycle
+        lifecycleVersion = "2.4.1"
+        activityKtxVersion = "1.4.0"
+
+        //room
+        room_version = "2.3.0"
+
+        // test library version
+        junitVersion = "4.13.2"
+        mockkVersion = "1.12.4"
+
+        // androidTest library version
+        androidxJunitVersion = "1.1.3"
+        espressoVersion = "3.4.0"
+
+        appDependencies = [
+                // standar library
+                androidxCore          : "androidx.core:core-ktx:$androidxCoreVersion",
+                appCompat             : "androidx.appcompat:appcompat:$appCompatVersion",
+                material              : "com.google.android.material:material:$materialVersion",
+                constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+                swipeRefreshLayout    : "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout",
+
+                paging                : "androidx.paging:paging-runtime:$paging_version",
+
+                // dependencies injection
+                daggerAndroid         : "com.google.dagger:dagger-android:$daggerVersion",
+                daggerAndroidSupport  : "com.google.dagger:dagger-android-support:$daggerVersion",
+
+                // lifecycle
+                lifecycleRuntime      : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion",
+                lifecycleViewModel    : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
+                lifecycleLiveData     : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
+                activityKtx           : "androidx.activity:activity-ktx:$activityKtxVersion",
+
+                // rest client
+                retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+                retrofitGson          : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+
+                // http client
+                okhttp                : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+                httpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
+
+                roomRuntime           : "androidx.room:room-runtime:$room_version",
+                roomKtx               : "androidx.room:room-ktx:$room_version",
+
+                // coroutine
+                coroutine             : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion",
+
+                // root checker
+                rootbeer              : "com.scottyab:rootbeer-lib:$rootbeetVersion",
+
+                // for loading image
+                glide                 : "com.github.bumptech.glide:glide:$glideVersion"
+        ]
+
+        kaptDependencies = [
+                glideCompiler         : "com.github.bumptech.glide:compiler:$glideVersion",
+                daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$daggerVersion",
+                daggerCompiler        : "com.google.dagger:dagger-compiler:$daggerVersion",
+
+                roomCompiler          : "androidx.room:room-compiler:$room_version"
+        ]
+
+        testDependencies = [
+                junit: "junit:junit:$junitVersion",
+                mockk: "io.mockk:mockk:$mockkVersion"
+        ]
+
+        androidTestDependencies = [
+                androidxJunit: "androidx.test.ext:$androidxJunitVersion",
+                espresso     : "androidx.test.espresso:espresso-core:$espressoVersion"
+        ]
+    }
+}
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     id 'com.android.application' version '7.2.1' apply false

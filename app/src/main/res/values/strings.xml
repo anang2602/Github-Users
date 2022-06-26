@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Github USer</string>
+    <string name="app_name">Github User</string>
+    <string name="text_alert_button_tutup">Tutup</string>
+    <string name="text_alert_rooted">Aplikasi ini tidak bisa di gunakan untuk perangkat yang sudah di root</string>
 </resources>
