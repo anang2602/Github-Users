@@ -52,7 +52,7 @@ class GithubUserRemoteMediator @Inject constructor(
                         id = it.id,
                         username = it.login,
                         avatar = it.avatar_url,
-                        repo = it.repos_url
+                        repo = it.repos_url,
                     )
                 }
                 db.GithubUserDao().insertUsers(usersRows)

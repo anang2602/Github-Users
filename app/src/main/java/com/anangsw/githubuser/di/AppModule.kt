@@ -9,17 +9,12 @@ import com.anangsw.githubuser.data.remote.RetrofitBuilder
 import com.anangsw.githubuser.data.repository.GithubUserRepository
 import com.anangsw.githubuser.data.repository.datasource.GithubDatasource
 import com.anangsw.githubuser.data.repository.remotemediator.GithubUserRemoteMediator
-import com.anangsw.githubuser.utils.DispatcherHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
 object AppModule {
-
-    @Singleton
-    @Provides
-    fun provideDispatcherHelper() = DispatcherHelper
 
     @Singleton
     @Provides
@@ -46,7 +41,8 @@ object AppModule {
     @Provides
     fun provideGithubRepository(
         db: GithubUserDatabase,
-        remoteMediator: GithubUserRemoteMediator
-    ): GithubUserRepository = GithubDatasource(db, remoteMediator)
+        remoteMediator: GithubUserRemoteMediator,
+        githubService: GithubService
+    ): GithubUserRepository = GithubDatasource(db, remoteMediator, githubService)
 
 }

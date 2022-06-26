@@ -10,5 +10,6 @@ data class User(
     val username: String,
     val avatar: String?,
     val repo: String,
-    val email: String? = null
+    val email: String? = null,
+    val created: String? = null
 )

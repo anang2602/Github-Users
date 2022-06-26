@@ -9,6 +9,6 @@ interface GithubUserRepository {
 
     fun letUsersFlow(): Flow<PagingData<User>>
 
-    suspend fun getUser(username: String) {}
+    suspend fun letUserFlow(username: String): Flow<Resource<User>>
 
 }

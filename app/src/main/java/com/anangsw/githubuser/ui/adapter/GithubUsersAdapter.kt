@@ -22,7 +22,7 @@ class GithubUsersAdapter(private val viewModel: MainViewModel) :
             binding.user = user
             binding.ivAvatar.loadAvatar(itemView.context, user?.avatar ?: "")
             binding.root.setOnClickListener {
-                viewModel.onItemUserClick()
+                user?.let { it1 -> viewModel.onItemUserClick(it1.username) }
             }
         }
 

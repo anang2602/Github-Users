@@ -1,23 +1,30 @@
 package com.anangsw.githubuser.ui
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.anangsw.githubuser.data.cache.model.User
 import com.anangsw.githubuser.data.repository.GithubUserRepository
-import com.anangsw.githubuser.utils.DispatcherHelper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val repository: GithubUserRepository,
-    private val dispatcherHelper: DispatcherHelper
-): ViewModel() {
+    private val repository: GithubUserRepository
+) : ViewModel() {
 
+    private val username = MutableLiveData<String>()
 
-    fun onItemUserClick() {
+    val letUserFlow = username.switchMap { user ->
+        liveData {
+            val res = repository.letUserFlow(user).distinctUntilChanged().asLiveData(Dispatchers.Main)
+            emitSource(res)
+        }
+    }
 
+    fun onItemUserClick(name: String) {
+        username.value = name
     }
 
     fun fetchUsers(): Flow<PagingData<User>> {
