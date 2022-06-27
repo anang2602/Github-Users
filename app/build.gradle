@@ -76,6 +76,9 @@ dependencies {
     implementation appDependencies.lifecycleLiveData
     implementation appDependencies.activityKtx
 
+    //shimmer
+    implementation appDependencies.shimmer
+
     // dependencies injection
     implementation appDependencies.daggerAndroid
     implementation appDependencies.daggerAndroidSupport
@@ -91,9 +94,16 @@ dependencies {
     implementation appDependencies.glide
     kapt kaptDependencies.glideCompiler
 
+    // test
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockk
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.coroutinesCoreTest
+    testImplementation testDependencies.truth
+    testImplementation testDependencies.coreTesting
 
-    androidTestImplementation androidTestDependencies.androidxJunit
+    // android test
+    androidTestImplementation androidTestDependencies.androidJunit
     androidTestImplementation androidTestDependencies.espresso
+
 }

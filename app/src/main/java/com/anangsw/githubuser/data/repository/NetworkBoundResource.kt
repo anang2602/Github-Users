@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
-abstract class NetworkBoundResource<ResultType, RequestType> {
+abstract class NetworkBoundResource<ResultType, RequestType>(private val dispatcher: CoroutineDispatcher) {
 
     fun asFlow() = flow {
         emit(Resource.loading(null))
@@ -48,7 +48,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 )
             })
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(dispatcher)
 
     protected open fun onFetchFailed() {}
 

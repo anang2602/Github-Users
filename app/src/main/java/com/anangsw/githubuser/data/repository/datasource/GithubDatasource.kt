@@ -14,6 +14,7 @@ import com.anangsw.githubuser.data.repository.NetworkBoundResource
 import com.anangsw.githubuser.data.repository.Resource
 import com.anangsw.githubuser.data.repository.remotemediator.GithubUserRemoteMediator
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 import java.io.IOException
@@ -23,6 +24,7 @@ class GithubDatasource @Inject constructor(
     private val db: GithubUserDatabase,
     private val remoteMediator: GithubUserRemoteMediator,
     private val githubService: GithubService,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : GithubUserRepository {
 
     @OptIn(ExperimentalPagingApi::class)
@@ -36,7 +38,7 @@ class GithubDatasource @Inject constructor(
     }
 
     override suspend fun letUserFlow(username: String): Flow<Resource<User>> {
-        return object : NetworkBoundResource<User, UserResponse>() {
+        return object : NetworkBoundResource<User, UserResponse>(dispatcher) {
             override suspend fun saveNetworkResult(item: UserResponse) {
                 db.GithubUserDao().updateUser(
                     item.id, item.email ?: "", item.created_at

@@ -14,6 +14,7 @@ buildscript {
         constraintLayoutVersion = "2.1.4"
         swipeRefreshLayout = "1.1.0"
         paging_version = "3.1.1"
+        shimmerVersion = "0.5.0"
 
         // glide
         glideVersion = "4.13.0"
@@ -40,13 +41,16 @@ buildscript {
         //room
         room_version = "2.3.0"
 
-        // test library version
+        // test
         junitVersion = "4.13.2"
-        mockkVersion = "1.12.4"
+        mockkVersion = "1.12.3"
+        truthVersion = "1.1.3"
+        coreTestingVersion = "2.1.0"
 
-        // androidTest library version
-        androidxJunitVersion = "1.1.3"
-        espressoVersion = "3.4.0"
+        // android test
+        androidJunitVersion = "1.1.3"
+        espresso = "3.4.0"
+        androidTestCoreVersion = "1.4.0"
 
         appDependencies = [
                 // standar library
@@ -57,6 +61,8 @@ buildscript {
                 swipeRefreshLayout    : "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout",
 
                 paging                : "androidx.paging:paging-runtime:$paging_version",
+
+                shimmer               : "com.facebook.shimmer:shimmer:$shimmerVersion",
 
                 // dependencies injection
                 daggerAndroid         : "com.google.dagger:dagger-android:$daggerVersion",
@@ -98,15 +104,27 @@ buildscript {
         ]
 
         testDependencies = [
-                junit: "junit:junit:$junitVersion",
-                mockk: "io.mockk:mockk:$mockkVersion"
+                junit             : "junit:junit:$junitVersion",
+                retrofitMock      : "com.squareup.retrofit2:retrofit-mock:$retrofitVersion",
+                mockk             : "io.mockk:mockk:$mockkVersion",
+                coroutinesCoreTest: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion",
+                coroutinesTest    : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion",
+                truth             : "com.google.truth:truth:$truthVersion",
+                coreTesting       : "androidx.arch.core:core-testing:$coreTestingVersion"
         ]
 
         androidTestDependencies = [
-                androidxJunit: "androidx.test.ext:$androidxJunitVersion",
-                espresso     : "androidx.test.espresso:espresso-core:$espressoVersion"
+                androidJunit   : "androidx.test.ext:junit:$androidJunitVersion",
+                espresso       : "androidx.test.espresso:espresso-core:$espresso",
+                androidTestCore: "androidx.test:core-ktx:$androidTestCoreVersion"
         ]
+
     }
+    repositories {
+        google()
+    }
+
+
 }
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -115,6 +133,7 @@ plugins {
     id 'com.android.library' version '7.2.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
