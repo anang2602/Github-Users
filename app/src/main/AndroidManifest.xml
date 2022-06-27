@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.anangsw.githubuser">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".GithubUserApp"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GithubUSer"
-        tools:targetApi="31">
+        android:theme="@style/MyAppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

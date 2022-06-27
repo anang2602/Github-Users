@@ -1,24 +1,39 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 32
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.anangsw.githubuser"
-        minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "BASE_URL", BASE_URL)
+            buildConfigField("String", "CA_EXP_DATE", CA_EXP_DATE)
+            buildConfigField("String", "CA_GITHUB_1", CA_GITHUB_1)
+            buildConfigField("String", "CA_GITHUB_2", CA_GITHUB_2)
             minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField("String", "BASE_URL", BASE_URL)
+            buildConfigField("String", "CA_EXP_DATE", CA_EXP_DATE)
+            buildConfigField("String", "CA_GITHUB_1", CA_GITHUB_1)
+            buildConfigField("String", "CA_GITHUB_2", CA_GITHUB_2)
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,15 +44,66 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // standar libray
+    implementation appDependencies.androidxCore
+    implementation appDependencies.appCompat
+    implementation appDependencies.material
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.swipeRefreshLayout
+    implementation appDependencies.paging
+
+    // rootbeer
+    implementation appDependencies.rootbeer
+
+    // rest client
+    implementation appDependencies.retrofit
+    implementation appDependencies.retrofitGson
+
+    // http client
+    implementation appDependencies.okhttp
+    implementation appDependencies.httpLoggingInterceptor
+
+    // lifecycle
+    implementation appDependencies.lifecycleRuntime
+    implementation appDependencies.lifecycleViewModel
+    implementation appDependencies.lifecycleLiveData
+    implementation appDependencies.activityKtx
+
+    //shimmer
+    implementation appDependencies.shimmer
+
+    // dependencies injection
+    implementation appDependencies.daggerAndroid
+    implementation appDependencies.daggerAndroidSupport
+    kapt kaptDependencies.daggerAndroidProcessor
+    kapt kaptDependencies.daggerCompiler
+
+    // room
+    implementation appDependencies.roomRuntime
+    implementation appDependencies.roomKtx
+    kapt kaptDependencies.roomCompiler
+
+    // glide
+    implementation appDependencies.glide
+    kapt kaptDependencies.glideCompiler
+
+    // test
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.coroutinesCoreTest
+    testImplementation testDependencies.truth
+    testImplementation testDependencies.coreTesting
+
+    // android test
+    androidTestImplementation androidTestDependencies.androidJunit
+    androidTestImplementation androidTestDependencies.espresso
+
 }
